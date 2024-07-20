@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Shop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .fruit-list {
+            background-color: #ffe6e6;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .fruit-item {
+            background-color: #ffffe6;
+            padding: 10px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Fruit Shop</h1>
+        <div class="form-group mt-4">
+            <label for="fruitInput">Add Fruits</label>
+            <input type="text" id="fruitInput" class="form-control" placeholder="Enter fruit name">
+            <button id="addFruitButton" class="btn btn-success mt-2">Add</button>
+        </div>
+        <div id="fruitList" class="fruit-list mt-3"></div>
+    </div>
+
+    <script>
+        document.getElementById('addFruitButton').addEventListener('click', addFruit);
+
+        function addFruit() {
+            const fruitInput = document.getElementById('fruitInput');
+            const fruitName = fruitInput.value.trim();
+
+            if (fruitName === '') return;
+
+            const fruitList = document.getElementById('fruitList');
+            const fruitItem = document.createElement('div');
+            fruitItem.className = 'fruit-item';
+            fruitItem.innerHTML = `
+                ${fruitName}
+                <button class="btn btn-danger btn-sm" onclick="deleteFruit(this)">x</button>
+            `;
+            fruitList.appendChild(fruitItem);
+            fruitInput.value = '';
+        }
+
+        function deleteFruit(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</body>
+
+</html>
